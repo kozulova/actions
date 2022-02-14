@@ -5,10 +5,11 @@ on:
     branches:
       - main
 
-
 jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        run: ls -t1 dir |  head -n 1
+      - name: Say hello
+        run: |
+          ls -t1 dir |  head -n 1
