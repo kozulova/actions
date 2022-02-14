@@ -4,13 +4,11 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'dir/*.rb'
 
 jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
-      - name: Say hello
+      - name: ls
         run: |
-          ls / -t1 |  head -n 1
+          ls
