@@ -10,5 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ls
+      - uses: actions/checkout@v2
         run: |
           ls -l
