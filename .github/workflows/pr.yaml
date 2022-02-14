@@ -16,4 +16,4 @@ jobs:
           echo $lastFile  
       - name: test2
         run: |
-          ls -t1 dir
+          yourfilenames=$(ls -t1 dir/*.rb)
