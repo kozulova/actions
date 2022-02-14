@@ -13,7 +13,8 @@ jobs:
       - name: test1
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
-          echo $lastFile  
+          echo $lastFile
+          echo $lastFile >> $GITHUB_ENV
       - name: test2
         run: |
           yourfilenames=$(ls dir)
@@ -22,7 +23,7 @@ jobs:
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( $lastFile < $file )); then
+              if (( ${{ env.lastFile }} < $file )); then
                 echo 1
               fi
           done
