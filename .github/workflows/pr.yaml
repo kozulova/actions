@@ -14,7 +14,7 @@ jobs:
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
           echo $lastFile
-          echo "action_state=yellow" >> $GITHUB_ENV
+          echo "action_state=$lastFile" >> $GITHUB_ENV
       - name: test2
         run: |
           yourfilenames=$(ls dir)
