@@ -20,7 +20,7 @@ jobs:
           echo $lastFile
           echo "lastFile=$lastFile" >> $GITHUB_ENV
       - name: checkout PR branch 
-        run: ${{ env.branch }}
+        run: git checkout ${{ env.branch }}
       - name: test2
         run: |
           yourfilenames=$(ls dir)
@@ -35,4 +35,15 @@ jobs:
           done
           echo "brokeFiles=$brokeFiles" >> $GITHUB_ENV
           echo $brokeFiles
+      - name: PR Comment
+        uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ github.event.number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: ':warning: Test!'
+            })
   
