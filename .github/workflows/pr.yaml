@@ -9,6 +9,8 @@ jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+    steps:
       - name: ls
         run: |
-          ls ./dir
+          ls dir
