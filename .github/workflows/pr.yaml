@@ -10,12 +10,12 @@ jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout current
       - uses: actions/checkout@v2
+      - name: Checkout current
         run: |
           ls -t1 dir |  head -n 1
-      - name: Checkout main
       - uses: actions/checkout@v2
+      - name: Checkout main
         with:
         path: main
         run: |
