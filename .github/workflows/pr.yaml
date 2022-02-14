@@ -13,4 +13,4 @@ jobs:
       - name: Check latest
         run: |
           lastFile=$(ls -t1 dir | head -n 1)
-          echo lastFile
+          echo $lastFile
