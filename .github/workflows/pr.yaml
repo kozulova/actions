@@ -9,7 +9,7 @@ jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
-      - name: ls
-        - uses: actions/checkout@v2
-          run: |
-            ls -l
+      - uses: actions/checkout@v2
+      - name: Say hello
+        run: |
+          ls -l
