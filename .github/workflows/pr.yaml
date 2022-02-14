@@ -23,7 +23,7 @@ jobs:
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( '20150725220521' < $file )); then
+              if (( ${{ env.action_state }} < $file )); then
                 echo 1
               fi
           done
