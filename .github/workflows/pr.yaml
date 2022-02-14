@@ -11,13 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Checkout current
-        run: |
-          ls -t1 dir |  head -n 1
+        run: ls -t1 dir |  head -n 1
       - uses: actions/checkout@v2
-      - name: Checkout main
         with:
           ref: main
-        -run: |
-          MAINLATEST = ls -t1 dir |  head -n 1
-          echo $MAINLATEST
+      -run: |
+        MAINLATEST = ls -t1 dir |  head -n 1
+        echo $MAINLATEST
