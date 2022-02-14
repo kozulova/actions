@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-        name: 'use main'
-        with:
-          ref: main
 
        - name: 'test1'
           run: echo 'test1'
