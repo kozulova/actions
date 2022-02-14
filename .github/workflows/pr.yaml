@@ -18,6 +18,6 @@ jobs:
       - name: Checkout main
         with:
           ref: main
-          run: |
-            MAINLATEST = ls -t1 dir |  head -n 1
-            echo $MAINLATEST
+        -run: |
+          MAINLATEST = ls -t1 dir |  head -n 1
+          echo $MAINLATEST
