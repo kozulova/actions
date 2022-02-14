@@ -15,7 +15,7 @@ jobs:
       - name: second branch name  
         run: echo running on branch $(echo ${GITHUB_HEAD_REF})
       - name: chaneckout main
-        run: git checkout -b main
+        run: git checkout main
       - name: test1
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
