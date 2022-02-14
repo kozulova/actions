@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v2
-        with:
-          ref: main
-        run: |
-          lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
-          echo $lastFile
+      name: 'use main'
+      with:
+        ref: main
+
+      - name: 'test1'
+        run: echo 'test1'
+
+      - name: 'test2'
+        run: echo 'test2'
