@@ -10,29 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Branch name
-        run: echo running on branch $(echo ${GITHUB_REF#refs/heads/})
       - name: second branch name  
-        run: echo running on branch $(echo ${GITHUB_HEAD_REF})
+        run: echo "branch=$GITHUB_HEAD_REF" >> $GITHUB_ENV)
       - name: chaneckout main
         run: git checkout main
       - name: test1
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
           echo $lastFile
-          echo "action_state=$lastFile" >> $GITHUB_ENV
-
+          echo "lastFile=$lastFile" >> $GITHUB_ENV
+      - name: checkout PR branch 
+        run: ${{ env.branch }}
       - name: test2
         run: |
           yourfilenames=$(ls dir)
-          echo $yourfilenames
-          echo "${{ env.action_state }}" 
+          brokeFiles=()
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( ${{ env.action_state }} < $file )); then
+              if (( ${{ env.lastFile }} < $file )); then
+                brokeFiles+=($eachfile)
                 echo 1
               fi
           done
-          echo 0
+          echo "brokeFiles=$brokeFiles" >> $GITHUB_ENV
+          echo $brokeFiles
   
