@@ -15,8 +15,7 @@ jobs:
           echo $lastFile
       - uses: actions/checkout@v2
         with:
-        path: main
+          path: main
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
-          echo $lastFile
-          
+          echo $lastFile     
