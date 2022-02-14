@@ -18,6 +18,7 @@ jobs:
         run: |
           yourfilenames=$(ls dir)
           echo $yourfilenames
+          echo $lastFile
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
