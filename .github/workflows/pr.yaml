@@ -1,0 +1,14 @@
+name: PR!
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check_latest_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CHECK latest file
+        run: |
+          ls dir/ -t1 |  head -n 1
