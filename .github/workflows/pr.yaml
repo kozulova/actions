@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Say hello
+      - name: Check latest
         run: |
-          ls -t1 dir |  head -n 1
+          MAINLATEST = ls -t1 dir |  head -n 1
+          echo $MAINLATEST
