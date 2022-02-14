@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: second branch name  
-        run: echo "branch=$GITHUB_HEAD_REF" >> $GITHUB_ENV)
+        run: echo "branch=$GITHUB_HEAD_REF" >> $GITHUB_ENV
       - name: chaneckout main
         run: git checkout main
       - name: test1
