@@ -21,7 +21,7 @@ jobs:
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( $fileOlder < $file )); then
+              if (( $lastFile < $file )); then
                 echo 1
               fi
           done
