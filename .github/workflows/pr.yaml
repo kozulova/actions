@@ -5,11 +5,19 @@ on:
     branches:
       - main
 
+
 jobs:
   check_latest_file:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout current
       - uses: actions/checkout@v2
-      - name: Say hello
         run: |
           ls -t1 dir |  head -n 1
+      - name: Checkout main
+      - uses: actions/checkout@v2
+        with:
+        path: main
+        run: |
+          MAINLATEST = ls -t1 dir |  head -n 1
+          echo $MAINLATEST
