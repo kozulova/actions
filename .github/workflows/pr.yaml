@@ -16,12 +16,13 @@ jobs:
           echo $lastFile  
       - name: test2
         run: |
-          yourfilenames=$(ls -t1 dir/*.rb)
-          echo yourfilenames
+          yourfilenames=$(ls dir)
+          echo $yourfilenames
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
               if (( $fileOlder < $file )); then
-                echo 0
+                echo 1
               fi
           done
+          echo 0
