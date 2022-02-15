@@ -1,9 +1,7 @@
 name: PR!
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
   check_file:
@@ -29,21 +27,8 @@ jobs:
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
               if (( ${{ env.lastFile }} < $file )); then
-                brokeFiles+=($eachfile)
-                echo 1
+                echo $eachfile could not be less then $lastFile
+                exit 1
               fi
           done
-          echo "brokeFiles=$brokeFiles" >> $GITHUB_ENV
-          echo $brokeFiles
-      - name: PR Comment
-        uses: actions/github-script@v2
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.number }},
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: ':warning: Test!'
-            })
   
