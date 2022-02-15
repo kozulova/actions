@@ -13,7 +13,7 @@ jobs:
       - name: second branch name  
         run: echo "branch=$GITHUB_HEAD_REF" >> $GITHUB_ENV
       - name: chaneckout main
-        run: git checkout "$DEFAULT_BRANCH"
+        run: git checkout "main"
       - name: test1
         run: |
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
