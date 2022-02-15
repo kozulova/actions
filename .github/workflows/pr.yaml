@@ -21,15 +21,18 @@ jobs:
           echo "lastFile=$lastFile" >> $GITHUB_ENV
       - name: checkout PR branch 
         run: git checkout ${{ env.branch }}
-      - name: test2
+      - name: show default branch
+        run: | 
+          echo ${{env.branch}}
+          echo $GITHUB_HEAD_REF
+      - name: git get all files form current branch
         run: |
           yourfilenames=$(ls dir)
-          brokeFiles=()
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
               if (( ${{ env.lastFile }} < $file )); then
-                echo $eachfile could not be less then $lastFile
+                echo $eachfile could not be less or equall then $lastFile
                 exit 1
               fi
           done
