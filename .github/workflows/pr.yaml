@@ -28,7 +28,7 @@ jobs:
       - name: git get all files form current branch
         run: |
           yourfilenames=$(ls dir)
-          echo yourfilenames
+          echo $yourfilenames
           for eachfile in $yourfilenames
           do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
