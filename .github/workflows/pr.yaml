@@ -23,7 +23,7 @@ jobs:
         run: |
           echo $GITHUB_HEAD_REF
       - name: checkout PR branch 
-        run: git checkout ${{ env.branch }}
+        run: git checkout $GITHUB_HEAD_REF
       - name: show default branch
         run: | 
           echo ${{env.branch}}
