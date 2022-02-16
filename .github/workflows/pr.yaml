@@ -19,6 +19,9 @@ jobs:
           lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
           echo $lastFile
           echo "lastFile=$lastFile" >> $GITHUB_ENV
+      - name: test git ref if changed
+        run: |
+          echo $GITHUB_HEAD_REF
       - name: checkout PR branch 
         run: git checkout ${{ env.branch }}
       - name: show default branch
