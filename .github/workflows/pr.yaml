@@ -27,4 +27,15 @@ jobs:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
-          echo ${{ steps.files.outputs.all }}
+          for eachfile in ${{ steps.files.outputs.added }}
+          do 
+            if [[ "$eachfile" =~ ./dir* ]]; then
+              file=$(echo $eachfile | awk -F '[/]' '{print $2}' | awk -F '[_]' '{print $1}')
+              echo $file File added
+                if (( ${{ env.lastFile }} < $file )); then
+                  echo $eachfile could not be less or equall then $lastFile
+                  exit 1
+                fi
+             fi   
+          done
+          echo ${{ steps.files.outputs.added }}
