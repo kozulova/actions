@@ -24,18 +24,12 @@ jobs:
           echo $GITHUB_HEAD_REF
       - name: checkout PR branch 
         run: git checkout $GITHUB_HEAD_REF
-      - name: show default branch
-        run: | 
-          echo ${{env.branch}}
-          echo $GITHUB_HEAD_REF
-      - name: git get all files form current branch
-        run: |
-          yourfilenames=$(ls dir)
-          echo $yourfilenames
-          for eachfile in $yourfilenames
-          do
+      - uses: jitterbit/get-changed-files@v1
+      - run: |
+          echo ${{ steps.files.outputs.all }}
+          for changed_file in ${{ steps.files.outputs.all }}; do
             file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( ${{ env.lastFile }} < $file )); then
+            if (( ${{ env.lastFile }} < $file )); then
                 echo $eachfile could not be less or equall then $lastFile
                 exit 1
               fi
