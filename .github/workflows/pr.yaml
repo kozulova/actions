@@ -32,7 +32,7 @@ jobs:
             if [[ "$eachfile" =~ dir* ]]; then
               file=$(echo $eachfile | awk -F '[/]' '{print $2}' | awk -F '[_]' '{print $1}')
               echo $file File added
-                if (( $file < ${{ env.lastFile }} )); then
+                if (( $file < $lastFile )); then
                   echo $eachfile could not be less or equall then $lastFile
                   exit 1
                 fi
