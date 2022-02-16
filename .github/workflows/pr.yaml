@@ -24,6 +24,7 @@ jobs:
           echo $GITHUB_HEAD_REF
       - name: checkout PR branch 
         run: git checkout $GITHUB_HEAD_REF
-      - uses: jitterbit/get-changed-files@v1
+      - id: files
+        uses: jitterbit/get-changed-files@v1
       - run: |
           echo ${{ steps.files.outputs.all }}
