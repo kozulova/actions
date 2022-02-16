@@ -27,10 +27,3 @@ jobs:
       - uses: jitterbit/get-changed-files@v1
       - run: |
           echo ${{ steps.files.outputs.all }}
-          for changed_file in ${{ steps.files.outputs.all }}; do
-            file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-            if (( ${{ env.lastFile }} < $file )); then
-                echo $eachfile could not be less or equall then $lastFile
-                exit 1
-              fi
-          done
