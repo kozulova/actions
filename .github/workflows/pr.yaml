@@ -15,18 +15,18 @@ jobs:
       - name: test1
         run: |
           lastFile=$(find db/migrate/*.rb -mtime -15 | tail -1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
-          echo "lastFile=$lastFile" >> $GITHUB_ENV
+          echo ::set-output name:lastFile::$(find db/migrate/*.rb -mtime -15 | tail -1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
       - uses: jitterbit/get-changed-files@v1
         id: files        
         continue-on-error: true
       - run: |
-          echo ${{ env.lastFile }}
+          echo ${{steps.vars.output.lastFile}}
           for eachfile in ${{ steps.files.outputs.added }}
           do 
             if [[ "$eachfile" =~ db/migrate* ]]; then
               file=$(echo $eachfile | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
               echo $file File added
-                if (( $file < $lastFile )); then
+                if (( $file < ${{steps.vars.output.lastFile}} )); then
                   echo $eachfile could not be less or equall then $lastFile
                   exit 1
                 fi
