@@ -16,7 +16,7 @@ jobs:
         run: git checkout "main"
       - name: test1
         run: |
-          lastFile=$(ls -t1 db/migrate/*.rb | head -n 1 | awk -F '[/]' '{print $3} | awk -F '[_]' '{print $1}')
+          lastFile=$(ls -t1 db/migrate/*.rb | head -n 1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
           echo $lastFile
       - name: checkout PR branch 
         run: git checkout 'main'
