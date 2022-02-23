@@ -13,6 +13,7 @@ jobs:
       - name: chaneckout main
         run: git checkout "main"
       - name: test1
+        id: vars
         run: |
           lastFile=$(find db/migrate/*.rb -mtime -15 | tail -1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
           echo ::set-output name=lastFile::$(find db/migrate/*.rb -mtime -15 | tail -1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
