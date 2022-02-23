@@ -13,24 +13,25 @@ jobs:
       - name: second branch name  
         run: echo "branch=$GITHUB_HEAD_REF" >> $GITHUB_ENV
       - name: chaneckout main
-        run: git checkout main
+        run: git checkout "main"
       - name: test1
         run: |
-          lastFile=$(ls -t1 dir | head -n 1 | awk -F '[_]' '{print $1}')
+          lastFile=$(ls -t1 db/migrate/*.rb | head -n 1 | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
           echo $lastFile
-          echo "lastFile=$lastFile" >> $GITHUB_ENV
       - name: checkout PR branch 
-        run: git checkout ${{ env.branch }}
-      - name: test2
-        run: |
-          yourfilenames=$(ls dir)
-          brokeFiles=()
-          for eachfile in $yourfilenames
-          do
-            file=$(echo $eachfile | awk -F '[_]' '{print $1}')
-              if (( ${{ env.lastFile }} < $file )); then
-                echo $eachfile could not be less then $lastFile
-                exit 1
-              fi
+        run: git checkout 'main'
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for eachfile in ${{ steps.files.outputs.added }}
+          do 
+            if [[ "$eachfile" =~ db/migrate* ]]; then
+              file=$(echo $eachfile | awk -F '[/]' '{print $3}' | awk -F '[_]' '{print $1}')
+              echo $file File added
+                if (( $file < $lastFile )); then
+                  echo $eachfile could not be less or equall then $lastFile
+                  exit 1
+                fi
+             fi   
           done
-  
+          echo ${{ steps.files.outputs.added }}
